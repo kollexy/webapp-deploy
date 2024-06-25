@@ -2,7 +2,7 @@ name: Build and Deploy Web App
 on:
   push:
     branches:
-    - main
+    - main1
 
 jobs:
   terraform-deploy-infra:
@@ -44,6 +44,7 @@ jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: terraform-deploy-infra
 
     steps:
     - name: Checkout code

@@ -2,7 +2,7 @@ name: Build and Deploy Web App
 on:
   push:
     branches:
-    - main
+    - main1
 
 jobs:
   terraform-deploy-infra:

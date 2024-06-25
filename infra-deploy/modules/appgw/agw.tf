@@ -54,6 +54,7 @@ resource "azurerm_application_gateway" "agw" {
     frontend_ip_configuration_name = "frontendipcfg"
     frontend_port_name             = "frontendport"
     protocol                       = "Http"
+    host_name                      =  var.app_service_hostname
   }
 
   request_routing_rule {

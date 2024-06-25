@@ -36,57 +36,57 @@ jobs:
     - name: Terraform Apply
       run: cd infra-deploy && terraform apply -auto-approve
  
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    needs: terraform-deploy-infra
+  # build-and-deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: terraform-deploy-infra
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: clone app
-      run: git clone https://github.com/Azure-Samples/msdocs-python-flask-webapp-quickstart
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v2
+  #   - name: clone app
+  #     run: git clone https://github.com/Azure-Samples/msdocs-python-flask-webapp-quickstart
            
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
+  #   - name: Set up Python
+  #     uses: actions/setup-python@v2
+  #     with:
+  #       python-version: '3.8'
 
-    - name: Set up virtual environment
-      run: |
-            python3 -m venv .venv
-      working-directory: msdocs-python-flask-webapp-quickstart
+  #   - name: Set up virtual environment
+  #     run: |
+  #           python3 -m venv .venv
+  #     working-directory: msdocs-python-flask-webapp-quickstart
     
-    - name: Install dependencies
-      run: |
-          source .venv/bin/activate
-          pip install -r requirements.txt
-      working-directory: msdocs-python-flask-webapp-quickstart  
+  #   - name: Install dependencies
+  #     run: |
+  #         source .venv/bin/activate
+  #         pip install -r requirements.txt
+  #     working-directory: msdocs-python-flask-webapp-quickstart  
 
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+  #   - name: Login to Azure
+  #     uses: azure/login@v1
+  #     with:
+  #       creds: ${{ secrets.AZURE_CREDENTIALS }}
 
 
-    - name: Retrieve Azure Web App Publish Profile
-      run: |
-          az webapp deployment list-publishing-profiles --resource-group test-web-app --name test-web-app-appservice --output json > publishProfile.json
+  #   - name: Retrieve Azure Web App Publish Profile
+  #     run: |
+  #         az webapp deployment list-publishing-profiles --resource-group test-web-app --name test-web-app-appservice --output json > publishProfile.json
          
-      env:
-          AZURE_APP_NAME: test-web-appservice
-          AZURE_RESOURCE_GROUP: test-web-app
+  #     env:
+  #         AZURE_APP_NAME: test-web-appservice
+  #         AZURE_RESOURCE_GROUP: test-web-app
 
    
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: test-web-appservice
-        slot-name: production
-        publish-profile: ./publishProfile.json
-        package: .
-        kudu-url: ${{ secrets.KUDU_URL }}
+  #   - name: Deploy to Azure Web App
+  #     uses: azure/webapps-deploy@v2
+  #     with:
+  #       app-name: test-web-appservice
+  #       slot-name: production
+  #       publish-profile: ./publishProfile.json
+  #       package: .
+  #       kudu-url: ${{ secrets.KUDU_URL }}
 
 
 

@@ -87,7 +87,7 @@ jobs:
       env:
         AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       run: |
-          az account set --subscription "$AZURE_SUBSCRIPTION_ID"
+          az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
     - name: Get Azure Subscriptions
       run: |
@@ -97,7 +97,7 @@ jobs:
     - name: Get Publish Profile
       id: get_publish_profile
       run: |
-        az account set --subscription ${AZURE_SUBSCRIPTION_ID}
+        az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         az webapp deployment list-publishing-profiles --name test-web-appservice --resource-group test-web-app --query "[0].publishingProfile" -o tsv > publishProfile
         base64 -w 0 publishProfile > publishProfileBase64
 

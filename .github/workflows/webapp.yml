@@ -84,10 +84,7 @@ jobs:
           rm azure_credentials.json
 
     - name: Set Azure Subscription
-      env:
-        AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      run: |
-          az account set --subscription $AZURE_SUBSCRIPTION_ID
+      run: az account set --subscription="${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
     - name: Get Azure Subscriptions
       run: |

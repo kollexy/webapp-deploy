@@ -2,7 +2,7 @@ name: Build and Deploy Web App
 on:
   push:
     branches:
-    - main1
+    - main
 
 jobs:
   terraform-deploy-infra:
@@ -31,25 +31,15 @@ jobs:
       run: cd aks && terraform init
       # env:
     - name: Terraform Plan
-      #   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      #   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      #   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      #   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+     
 
       run: cd aks && terraform plan
       # env:
     - name: Terraform Apply
-      #   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      #   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      #   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      #   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+     
 
       run: cd aks && terraform apply -auto-approve
-      # env:
-  #   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-  #   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-  #   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  #   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+ 
 
 
   build-and-deploy:

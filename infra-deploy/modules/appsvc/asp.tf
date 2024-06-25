@@ -43,7 +43,7 @@ resource "azurerm_private_endpoint" "pep" {
 
   private_service_connection {
     name                           = "apps-privateserviceconnection"
-    private_connection_resource_id = azurerm_app_service.apps.id
+    private_connection_resource_id = azurerm_linux_web_app.apps.id
     subresource_names              = ["sites"]
     is_manual_connection           = false
   }

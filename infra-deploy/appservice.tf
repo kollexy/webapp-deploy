@@ -26,7 +26,6 @@ module "appservice" {
 }
 
 
-
 module "application_gateway" {
   source = "./modules/appgw"
   resource_group_name = module.vnet.resource_group_name

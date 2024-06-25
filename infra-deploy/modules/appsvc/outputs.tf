@@ -3,11 +3,11 @@ output "private_endpoint_address" {
 }
 
 output "appsvc_name" {
-    value = azurerm_app_service.apps.name
+    value = azurerm_linux_web_app.apps.name
   
 }
 
 output "appsvc_host_name" {
-    value = azurerm_app_service.apps.default_site_hostname
+    value = azurerm_linux_web_app.apps.default_site_hostname
   
 }

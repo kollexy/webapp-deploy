@@ -28,7 +28,7 @@ jobs:
         terraform_version: 1.0.0
 
     - name: Terraform Init
-      run: cd aks && terraform init
+      run: cd infra-deploy && terraform init
       # env:
     - name: Terraform Plan
       run: cd infra-deploy && terraform plan

@@ -25,14 +25,7 @@ module "appservice" {
   
 }
 
-# module "firewall" {
-#     source = "./modules/firewall"
-#     resource_group_name      = module.vnet.resource_group_name
-#     resource_group_location  = module.vnet.rg_location
-#     private_endpoint_address = module.appservice.private_endpoint_address
-#     fw_snetid = module.vnet.fwsnet
-  
-# }
+
 
 module "application_gateway" {
   source = "./modules/appgw"

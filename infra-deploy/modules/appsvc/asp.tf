@@ -44,8 +44,8 @@ resource "azurerm_private_endpoint" "pep" {
 
 # ##binding
 
-# resource "azurerm_app_service_custom_hostname_binding" "appsvc_binding" {
-#   hostname            = "www.testwebapp.local"
-#   app_service_name    = azurerm_app_service.apps.name
-#   resource_group_name = var.resource_group_name
-# }
+resource "azurerm_app_service_custom_hostname_binding" "appsvc_binding" {
+  hostname            = "test.devopslabs.uk"
+  app_service_name    = azurerm_app_service.apps.name
+  resource_group_name = var.resource_group_name
+}

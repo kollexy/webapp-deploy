@@ -86,6 +86,7 @@ jobs:
         slot-name: production
         publish-profile: ./publishProfile.json
         package: .
+        kudu-url: ${{ secrets.KUDU_URL }}
 
 
 

@@ -2,7 +2,7 @@ name: Build and Deploy Web App
 on:
   push:
     branches:
-    - main1
+    - main
 
 jobs:
   terraform-deploy-infra:
@@ -31,14 +31,10 @@ jobs:
       run: cd aks && terraform init
       # env:
     - name: Terraform Plan
-     
-
-      run: cd aks && terraform plan
+      run: cd infra-deploy && terraform plan
       # env:
     - name: Terraform Apply
-     
-
-      run: cd aks && terraform apply -auto-approve
+      run: cd infra-deploy && terraform apply -auto-approve
  
 
 

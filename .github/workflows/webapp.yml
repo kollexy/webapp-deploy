@@ -71,7 +71,7 @@ jobs:
 
     - name: Retrieve Azure Web App Publish Profile
       run: |
-          az webapp deployment list-publishing-profiles --resource-group test-web-app --name test-web-appservice --output json > publishProfile.json
+          az webapp deployment list-publishing-profiles --resource-group test-web-app --name test-web-app-appservice --output json > publishProfile.json
           mv *.PublishSettings publishProfile.PublishSettings  # Rename the file for clarity
       env:
           AZURE_APP_NAME: test-web-appservice

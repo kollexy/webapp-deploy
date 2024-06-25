@@ -55,7 +55,7 @@ jobs:
     - name: Set up virtual environment
       run: |
             python3 -m venv .venv
-            working-directory: msdocs-python-flask-webapp-quickstart
+      working-directory: msdocs-python-flask-webapp-quickstart
     
     - name: Install dependencies
       run: |

@@ -51,7 +51,7 @@ jobs:
       with:
         python-version: '3.8'
     - name: clone app
-      run: 
+      run: |
        git clone https://github.com/Azure-Samples/msdocs-python-flask-webapp-quickstart
        cd msdocs-python-flask-webapp-quickstart
        python3 -m venv .venv

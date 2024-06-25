@@ -73,7 +73,7 @@ jobs:
       run: |
           az webapp deployment list-publishing-profiles --resource-group test-web-app --name test-web-appservice --output file
           mv *.PublishSettings publishProfile.PublishSettings  # Rename the file for clarity
-        env:
+      env:
           AZURE_APP_NAME: test-web-appservice
           AZURE_RESOURCE_GROUP: test-web-app
 

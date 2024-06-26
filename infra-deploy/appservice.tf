@@ -19,10 +19,14 @@ resource "azurerm_linux_web_app" "apps" {
   resource_group_name   = azurerm_resource_group.rg.name
   service_plan_id       = azurerm_service_plan.asp.id
   https_only            = true
+  
   site_config { 
     minimum_tls_version = "1.2"
-    linux_fx_version = "PYTHON|3.12"
+    application_stack {
+    python_version = "3.12"
+  }
     
   }
+  
   
 }

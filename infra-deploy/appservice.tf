@@ -1,3 +1,4 @@
+# Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.resource_group_location
@@ -11,7 +12,6 @@ resource "azurerm_service_plan" "asp" {
   os_type             = "Linux"
   sku_name            = "B1"
 }
-
 # App Service
 resource "azurerm_linux_web_app" "apps" {
   name                  = "${azurerm_resource_group.rg.name}-appservice"

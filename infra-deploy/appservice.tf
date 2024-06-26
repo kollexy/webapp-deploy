@@ -21,7 +21,7 @@ resource "azurerm_linux_web_app" "apps" {
   https_only            = true
   site_config { 
     minimum_tls_version = "1.2"
-    linux_fx_version = "Python|3.12"
+    linux_fx_version = "PYTHON|3.12"
     
   }
   

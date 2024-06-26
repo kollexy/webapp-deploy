@@ -1,35 +1,56 @@
-
-## vnet and subnet config
-module "vnet" {
-    source = "./modules/vnet"
-    resource_group_location = var.resource_group_location
-    resource_group_name = var.resource_group_name
-  
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.resource_group_location
 }
 
-module "dns" {
-  source = "./modules/dns"
-  vnetid = module.vnet.vnetid
-  resource_group_location = module.vnet.rg_location
-  resource_group_name = module.vnet.resource_group_name
-  private_ip_address = module.appservice.private_endpoint_address
-  appsvc_name =  module.appservice.appsvc_name
+# App Service Plan
+resource "azurerm_service_plan" "asp" {
+  name                = "${var.resource_group_name}-asp"
+  location            = var.resource_group_location
+  resource_group_name = var.resource_group_name
+  os_type             = "Linux"
+  sku_name            = "B1"
 }
 
-module "appservice" {
-    source = "./modules/appsvc"
-    resource_group_location = module.vnet.rg_location
-    resource_group_name = module.vnet.resource_group_name
-    subnet_id = module.vnet.pepsnet
-
-  
+# App Service
+resource "azurerm_linux_web_app" "apps" {
+  name                  = "${var.resource_group_name}-appservice"
+  location              = var.resource_group_location
+  resource_group_name   = var.resource_group_name
+  service_plan_id       = azurerm_service_plan.asp.id
+  https_only            = true
+  site_config { 
+    minimum_tls_version = "1.2"
+  }
 }
 
+# resource "azurerm_app_service_source_control" "sourcecontrol" {
+#   app_id             = azurerm_linux_web_app.apps.id
+#   repo_url           = "https://github.com/Azure-Samples/nodejs-docs-hello-world"
+#   branch             = "master"
+#   use_manual_integration = true
+#   use_mercurial      = false
+# }
 
-module "application_gateway" {
-  source = "./modules/appgw"
-  resource_group_name = module.vnet.resource_group_name
-  resource_group_location = module.vnet.rg_location
-  agw_subnet_id = module.vnet.agwsnet
-  app_service_hostname = module.appservice.appsvc_host_name
-}
+# Private Endpoint for App Service
+# resource "azurerm_private_endpoint" "pep" {
+#   name                = "${var.resource_group_name}-private-endpoint"
+#   location            = var.resource_group_location
+#   resource_group_name = var.resource_group_name
+#   subnet_id           = var.subnet_id   ####azurerm_subnet.appservice_subnet.id
+
+#   private_service_connection {
+#     name                           = "apps-privateserviceconnection"
+#     private_connection_resource_id = azurerm_linux_web_app.apps.id
+#     subresource_names              = ["sites"]
+#     is_manual_connection           = false
+#   }
+# }
+
+# ##binding
+
+# resource "azurerm_app_service_custom_hostname_binding" "appsvc_binding" {
+#   hostname            = "test.devopslabs.uk"
+#   app_service_name    = azurerm_app_service.apps.name
+#   resource_group_name = var.resource_group_name
+# }
